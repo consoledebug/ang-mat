@@ -1,0 +1,11 @@
+table{
+    width: 100%;
+}
+.add-product {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-product>* {
+  width: 100%;
+}
