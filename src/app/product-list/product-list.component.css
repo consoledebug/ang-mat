@@ -9,3 +9,9 @@ table{
 .add-product>* {
   width: 100%;
 }
+.product-table table button {
+  margin-right: 8px;
+}
+.product-table button {
+  margin-left: 20px;
+}

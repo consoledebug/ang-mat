@@ -9,7 +9,7 @@ export interface Product {
 }
 
 const ELEMENT_DATA: Product[] = [
-  // { id: 1, name: 'Hydrogen', price: 1.0079, description: 'H' },
+  { id: 1, name: 'T shirt', price: 2, description: 'T shirt' },
   // { id: 2, name: 'Helium', price: 4.0026, description: 'He' },
   // { id: 3, name: 'Lithium', price: 6.941, description: 'Li' },
   // { id: 4, name: 'Beryllium', price: 9.0122, description: 'Be' },
@@ -48,10 +48,11 @@ export class ProductListComponent implements OnInit {
     this.productData.id = ELEMENT_DATA.length+1;
     ELEMENT_DATA.push(this.productData)
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-    console.log(this.dataSource.data);
     this.isAddProductView = false;
+    this.resetProductData();
   }
   cancelAddProductView(): void {
+    this.resetProductData();
     this.isAddProductView = false;
   }
   submit($event) {
@@ -68,7 +69,7 @@ export class ProductListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  displayedColumns: string[] = ['id', 'name', 'price', 'description'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'description','action'];
   // dataSource = new MatTableDataSource<Product>();
   // dataSource = ELEMENT_DATA;
 
@@ -77,6 +78,17 @@ export class ProductListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  //resetting product details
+  resetProductData(): void {
+    this.productData = { id: 0, name: "", price: 0, description: "" }
+  }
+
+  //editing product details
+  editProductData(data): void{
+    this.productData = data;
+    this.isAddProductView = true;
   }
 
 }
