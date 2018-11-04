@@ -45,8 +45,11 @@ export class ProductListComponent implements OnInit {
     this.isAddProductView = true;
   }
   saveProduct(Product: Product): void {
-    this.productData.id = ELEMENT_DATA.length+1;
-    ELEMENT_DATA.push(this.productData)
+    if(this.productData.id == 0){
+      this.productData.id = ELEMENT_DATA.length + 1;
+      ELEMENT_DATA.push(this.productData);
+    }
+    else this.productData[this.productData.id] = this.productData;
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
     this.isAddProductView = false;
     this.resetProductData();
@@ -89,6 +92,12 @@ export class ProductListComponent implements OnInit {
   editProductData(data): void{
     this.productData = data;
     this.isAddProductView = true;
+  }
+
+  //removing elements
+  deleteProductData(index):void{
+    ELEMENT_DATA.splice(index,1)
+    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
   }
 
 }
